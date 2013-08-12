@@ -43,7 +43,8 @@ public abstract class AbstractJdbc2DatabaseMetaData
         if (INDEX_MAX_KEYS == 0)
         {
             String sql;
-            if (connection.haveMinimumServerVersion("8.0")) {
+            boolean isRedshift = true;
+            if (connection.haveMinimumServerVersion("8.0") && !isRedshift) {
                 sql = "SELECT setting FROM pg_catalog.pg_settings WHERE name='max_index_keys'";
             } else {
                 String from;
